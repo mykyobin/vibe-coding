@@ -112,6 +112,7 @@
         /* Avoid text overflow issues in keep-all on mobile */
         .word-break-keep-all {
             word-break: keep-all;
+            word-wrap: break-word;
         }
         /* Smooth, Hardware-Accelerated Parallax Layer Tuning */
         #parallax-bg-1, #parallax-bg-2, #parallax-text {
@@ -124,16 +125,16 @@
         }
     </style>
 </head>
-<body class="bg-warmLight-bg text-warmLight-text dark:bg-charcoal dark:text-gray-200 font-sans selection:bg-gold selection:text-burgundy-950">
+<body class="bg-warmLight-bg text-warmLight-text dark:bg-charcoal dark:text-gray-200 font-sans selection:bg-gold selection:text-burgundy-950 overflow-x-hidden">
 
     <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-charcoal/90 backdrop-blur-md border-b border-warmLight-border dark:border-burgundy-800/30 premium-transition">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3">
-                <div class="w-10 h-10 border border-gold rounded-full flex items-center justify-center bg-burgundy-950/10 dark:bg-burgundy-900/50">
-                    <span class="font-enSerif text-burgundy dark:text-gold text-xl font-bold">S</span>
+            <a href="#" class="flex items-center gap-2 sm:gap-3">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 border border-gold rounded-full flex items-center justify-center bg-burgundy-950/10 dark:bg-burgundy-900/50 flex-shrink-0">
+                    <span class="font-enSerif text-burgundy dark:text-gold text-lg font-bold">S</span>
                 </div>
                 <div class="leading-none">
-                    <span class="font-serif text-burgundy dark:text-gold tracking-widest text-base sm:text-lg font-bold block">서울미식회</span>
+                    <span class="font-serif text-burgundy dark:text-gold tracking-wider sm:tracking-widest text-sm sm:text-lg font-bold block">서울미식회</span>
                     <span class="font-enSerif text-[8px] sm:text-[9px] text-stone-500 dark:text-gray-400 tracking-[0.25em] uppercase block mt-1">Seoul Gourmet Guide</span>
                 </div>
             </a>
@@ -147,33 +148,32 @@
             </nav>
 
             <!-- Control Buttons (Theme Toggle + Action Button) -->
-            <div class="flex items-center gap-2 sm:gap-4">
+            <div class="flex items-center gap-1.5 sm:gap-4">
                 <!-- User Tier Badge (Floating Status Card Trigger) -->
-                <button id="tier-status-btn" class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-stone-200 dark:border-gold/30 bg-stone-50 dark:bg-burgundy-900/30 hover:bg-stone-100 dark:hover:bg-burgundy-900/50 transition-all text-xs font-semibold focus:outline-none">
-                    <span id="nav-tier-badge" class="inline-block w-2.5 h-2.5 rounded-full bg-amber-700 animate-pulse"></span>
-                    <span id="nav-tier-text" class="text-stone-700 dark:text-gold">브론즈 초보 식객</span>
-                    <span id="nav-points-text" class="text-[10px] text-stone-400 dark:text-gray-400 font-light">(0 P)</span>
+                <button id="tier-status-btn" class="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-full border border-stone-200 dark:border-gold/30 bg-stone-50 dark:bg-burgundy-900/30 hover:bg-stone-100 dark:hover:bg-burgundy-900/50 transition-all text-[11px] sm:text-xs font-semibold focus:outline-none flex-shrink-0">
+                    <span id="nav-tier-badge" class="inline-block w-2 w-2.5 h-2 sm:h-2.5 rounded-full bg-amber-700 animate-pulse"></span>
+                    <span id="nav-tier-text" class="hidden sm:inline text-stone-700 dark:text-gold">브론즈 초보 식객</span>
+                    <span id="nav-points-text" class="text-[9px] sm:text-[10px] text-stone-400 dark:text-gray-400 font-light">(0 P)</span>
                 </button>
 
                 <!-- Theme Toggler Button -->
-                <button id="theme-toggle" class="w-10 h-10 rounded-full border border-stone-300 dark:border-gold/40 flex items-center justify-center text-stone-600 dark:text-gold hover:bg-stone-100 dark:hover:bg-burgundy-900/40 transition-colors focus:outline-none" aria-label="화면 테마 변경">
-                    <i id="theme-toggle-icon" class="fa-solid fa-moon text-lg"></i>
+                <button id="theme-toggle" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-stone-300 dark:border-gold/40 flex items-center justify-center text-stone-600 dark:text-gold hover:bg-stone-100 dark:hover:bg-burgundy-900/40 transition-colors focus:outline-none flex-shrink-0" aria-label="화면 테마 변경">
+                    <i id="theme-toggle-icon" class="fa-solid fa-moon text-sm sm:text-lg"></i>
                 </button>
 
                 <!-- CTA Button -->
-                <a href="#curator" class="hidden sm:inline-block px-4 py-2.5 rounded border border-burgundy/40 text-burgundy hover:bg-burgundy hover:text-white dark:border-gold/40 dark:text-gold dark:hover:border-gold dark:hover:bg-gold dark:hover:text-burgundy-950 text-xs tracking-wider font-semibold uppercase premium-transition">
+                <a href="#curator" class="hidden sm:inline-block px-3 py-2 sm:px-4 sm:py-2.5 rounded border border-burgundy/40 text-burgundy hover:bg-burgundy hover:text-white dark:border-gold/40 dark:text-gold dark:hover:border-gold dark:hover:bg-gold dark:hover:text-burgundy-950 text-[11px] sm:text-xs tracking-wider font-semibold uppercase premium-transition">
                     나의 테이블 찾기
                 </a>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="flex md:hidden w-10 h-10 items-center justify-center text-stone-700 dark:text-gray-200 focus:outline-none" aria-label="메뉴 열기">
-                    <i class="fa-solid fa-bars text-xl"></i>
+                <button id="mobile-menu-btn" class="flex md:hidden w-8 h-8 sm:w-10 sm:h-10 items-center justify-center text-stone-700 dark:text-gray-200 focus:outline-none flex-shrink-0" aria-label="메뉴 열기">
+                    <i class="fa-solid fa-bars text-lg sm:text-xl"></i>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Mobile Drawer Overlay Menu -->
     <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 z-50 hidden backdrop-blur-sm opacity-0 transition-opacity duration-300">
         <div id="mobile-menu-drawer" class="absolute top-0 right-0 w-4/5 max-w-xs h-full bg-warmLight-bg dark:bg-charcoal p-6 flex flex-col justify-between border-l border-warmLight-border dark:border-burgundy-800/30 transform translate-x-full">
             <div>
@@ -201,7 +201,6 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
     <section class="relative flex flex-col justify-center items-center pt-28 pb-16 sm:py-24 px-4 sm:px-6 overflow-hidden min-h-screen">
         <!-- Radial shadow overlay -->
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.04)_0%,rgba(252,251,250,1)_80%)] dark:bg-[radial-gradient(circle_at_center,rgba(74,14,23,0.15)_0%,rgba(17,19,23,1)_80%)] pointer-events-none transition-all duration-300"></div>
@@ -212,7 +211,7 @@
 
         <div id="parallax-text" class="max-w-4xl mx-auto text-center relative z-10 flex flex-col justify-center items-center h-full px-2 sm:px-4">
             <!-- Ribbon Badge -->
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-burgundy/20 dark:border-gold/30 bg-burgundy-50 dark:bg-burgundy-900/40 text-burgundy dark:text-gold text-[10px] sm:text-xs tracking-widest font-medium mb-6 sm:mb-8 animate-fade-in">
+            <div class="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full border border-burgundy/20 dark:border-gold/30 bg-burgundy-50 dark:bg-burgundy-900/40 text-burgundy dark:text-gold text-[9px] sm:text-xs tracking-widest font-medium mb-6 sm:mb-8 animate-fade-in">
                 <i class="fa-solid fa-star text-[8px] sm:text-[10px]"></i>
                 <span>THE ULTIMATE SEOUL TABLE</span>
                 <i class="fa-solid fa-star text-[8px] sm:text-[10px]"></i>
@@ -226,12 +225,12 @@
             </h1>
 
             <!-- Subtitle -->
-            <p class="text-xs sm:text-lg text-stone-600 dark:text-gray-400 max-w-2xl mx-auto mb-8 sm:mb-12 font-light leading-relaxed px-2">
+            <p class="text-xs sm:text-lg text-stone-600 dark:text-gray-400 max-w-2xl mx-auto mb-8 sm:mb-12 font-light leading-relaxed px-2 word-break-keep-all">
                 미슐랭, 블루리본, Taste of Seoul 등 세계적인 명예를 안은 미식 명소부터, <br class="hidden sm:inline"> 수만 명 대중의 실제 별점으로 증명된 진짜 알짜배기만을 완벽하게 엄선합니다.
             </p>
 
             <!-- CTA Callouts -->
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md sm:max-w-none px-4">
+            <div class="flex flex-col sm:flex-row gap-3.5 justify-center items-center w-full max-w-md sm:max-w-none px-4">
                 <a href="#curator" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded bg-burgundy dark:bg-gradient-to-r dark:from-gold dark:via-gold-warm dark:to-gold hover:opacity-90 text-white dark:text-burgundy-950 text-xs sm:text-sm font-semibold tracking-wider shadow-lg shadow-burgundy/10 dark:shadow-gold/15 premium-transition text-center">
                     <i class="fa-solid fa-compass mr-2"></i> 맞춤 테이블 추천 시작하기
                 </a>
@@ -253,7 +252,6 @@
         </div>
     </section>
 
-    <!-- About Section (Storytelling flow: Problem & Solution) -->
     <section id="about" class="py-16 sm:py-24 bg-stone-100 dark:bg-burgundy-950/40 relative border-t border-b border-warmLight-border dark:border-burgundy-900/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-start">
@@ -261,19 +259,19 @@
                 <!-- Left: Problem Hook -->
                 <div class="lg:col-span-5 space-y-4 sm:space-y-6">
                     <span class="font-enSerif text-burgundy dark:text-gold text-xs sm:text-sm tracking-widest font-medium block">THE PROBLEM HOOK</span>
-                    <h2 class="font-serif text-xl sm:text-4xl text-burgundy dark:text-white leading-snug">
+                    <h2 class="font-serif text-xl sm:text-4xl text-burgundy dark:text-white leading-snug word-break-keep-all">
                         매번 맛집 검색에 실패하거나,<br class="hidden sm:inline">
                         수많은 리뷰 사이트를 오가며<br>
                         <span class="text-gold-dark dark:text-gold">피로감을 느끼진 않으셨나요?</span>
                     </h2>
-                    <p class="text-stone-600 dark:text-gray-400 text-xs sm:text-base leading-relaxed font-light">
+                    <p class="text-stone-600 dark:text-gray-400 text-xs sm:text-base leading-relaxed font-light word-break-keep-all">
                         광고로 도배된 블로그 리뷰, 인위적인 바이럴 맛집, 일관성 없는 평점 시스템 속에서 진정한 미식 경험을 선점하기란 결코 쉬운 일이 아닙니다. 소중한 사람과의 한 끼를 도박에 맡길 수는 없습니다.
                     </p>
                     <div class="p-4 sm:p-6 rounded-lg bg-white dark:bg-charcoal/50 border border-warmLight-border dark:border-burgundy-800/20 flex gap-4 items-start">
                         <i class="fa-solid fa-circle-exclamation text-burgundy dark:text-burgundy-600 text-lg sm:text-xl mt-1 flex-shrink-0"></i>
                         <div>
                             <h4 class="font-serif text-burgundy dark:text-white text-xs sm:text-base mb-1">피로를 부르는 정보의 과잉</h4>
-                            <p class="text-[10px] sm:text-xs text-stone-500 dark:text-gray-500">인스타그램 하트 수, 허위 예약 취소 리뷰 사이에서 진짜 깊이 있는 철학을 가진 '검증된 테이블'을 분별해야만 합니다.</p>
+                            <p class="text-[10px] sm:text-xs text-stone-500 dark:text-gray-500 leading-normal word-break-keep-all">인스타그램 하트 수, 허위 예약 취소 리뷰 사이에서 진짜 깊이 있는 철학을 가진 '검증된 테이블'을 분별해야만 합니다.</p>
                         </div>
                     </div>
                 </div>
@@ -281,7 +279,7 @@
                 <!-- Right: Solution Explanation & Premium Image Mock -->
                 <div class="lg:col-span-7 space-y-8 sm:space-y-10 lg:pl-6">
                     <span class="font-enSerif text-burgundy dark:text-gold text-xs sm:text-sm tracking-widest font-medium block">OUR SOLUTION</span>
-                    <h3 class="font-serif text-lg sm:text-3xl text-burgundy dark:text-white leading-normal">
+                    <h3 class="font-serif text-lg sm:text-3xl text-burgundy dark:text-white leading-normal word-break-keep-all">
                         세계적인 명예를 안은 미식 리스트와,<br>
                         수만 대중의 진짜 평점 빅데이터를 병합합니다.
                     </h3>
@@ -289,13 +287,13 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                         <div class="p-4 sm:p-6 rounded border border-warmLight-border dark:border-gray-800 bg-white dark:bg-charcoal/40">
                             <span class="text-burgundy dark:text-gold text-base sm:text-2xl font-serif block mb-2 sm:mb-3">01. 공식 가이드 통합</span>
-                            <p class="text-[10px] sm:text-xs text-stone-500 dark:text-gray-400 leading-relaxed">
+                            <p class="text-[10px] sm:text-xs text-stone-500 dark:text-gray-400 leading-relaxed word-break-keep-all">
                                 미슐랭, 블루리본, Taste of Seoul 등의 등재 데이터를 실시간으로 크롤링하여 전문가에 의해 인정받은 다이닝 라인업을 기본 축으로 삼습니다.
                             </p>
                         </div>
                         <div class="p-4 sm:p-6 rounded border border-warmLight-border dark:border-gray-800 bg-white dark:bg-charcoal/40">
                             <span class="text-burgundy dark:text-gold text-base sm:text-2xl font-serif block mb-2 sm:mb-3">02. 실시간 크라우드 검증</span>
-                            <p class="text-[10px] sm:text-xs text-stone-500 dark:text-gray-400 leading-relaxed">
+                            <p class="text-[10px] sm:text-xs text-stone-500 dark:text-gray-400 leading-relaxed word-break-keep-all">
                                 카카오맵, 네이버 지도, 캐치테이블의 실시간 별점과 리뷰 밀도를 지표화하여, 가이드 등재 당시의 환상이 아닌 현재 진행형 최고를 파악합니다.
                             </p>
                         </div>
@@ -309,7 +307,7 @@
                              onerror="this.src='https://placehold.co/1200x500/2a0408/ffffff?text=Premium+Dining+Space'">
                         <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 z-20">
                             <span class="text-gold-light dark:text-gold text-[9px] sm:text-xs tracking-widest uppercase block mb-1">Curation Philosophy</span>
-                            <p class="font-serif text-white text-sm sm:text-xl">"맛의 격을 높이고, 불필요한 검색 피로를 단 3초로 줄입니다."</p>
+                            <p class="font-serif text-white text-sm sm:text-xl word-break-keep-all">"맛의 격을 높이고, 불필요한 검색 피로를 단 3초로 줄입니다."</p>
                         </div>
                     </div>
                 </div>
@@ -317,7 +315,6 @@
         </div>
     </section>
 
-    <!-- Features Section (Strength Cards) -->
     <section id="features" class="py-16 sm:py-24 bg-warmLight-bg dark:bg-charcoal relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             
@@ -335,7 +332,7 @@
                             <i class="fa-solid fa-award text-burgundy dark:text-gold text-sm sm:text-lg"></i>
                         </div>
                         <h3 class="font-serif text-base sm:text-xl text-burgundy dark:text-white mb-2 sm:mb-4">공인된 미식 권위의 통합</h3>
-                        <p class="text-[11px] sm:text-sm text-stone-600 dark:text-gray-400 leading-relaxed font-light">
+                        <p class="text-[11px] sm:text-sm text-stone-600 dark:text-gray-400 leading-relaxed font-light word-break-keep-all">
                             미슐랭 빕구르망·스타 가이드, 블루리본 서베이의 리본 개수, 서울시 선정 대표 미식 목록인 'Taste of Seoul' 데이터를 하나로 관통하는 독보적인 다이닝 풀(Pool)을 형성합니다.
                         </p>
                     </div>
@@ -351,7 +348,7 @@
                             <i class="fa-solid fa-users text-burgundy dark:text-gold text-sm sm:text-lg"></i>
                         </div>
                         <h3 class="font-serif text-base sm:text-xl text-burgundy dark:text-white mb-2 sm:mb-4">집단지성 기반의 2차 검증</h3>
-                        <p class="text-[11px] sm:text-sm text-stone-600 dark:text-gray-400 leading-relaxed font-light">
+                        <p class="text-[11px] sm:text-sm text-stone-600 dark:text-gray-400 leading-relaxed font-light word-break-keep-all">
                             전문가 등재에 그치지 않고 네이버 플레이스 실시간 정보, 카카오맵 집단 지수, 캐치테이블 평점 4.7 이상의 까다로운 필터를 동시에 통과한 알짜배기만을 크로스 체킹합니다.
                         </p>
                     </div>
@@ -367,7 +364,7 @@
                             <i class="fa-solid fa-sliders text-burgundy dark:text-gold text-sm sm:text-lg"></i>
                         </div>
                         <h3 class="font-serif text-base sm:text-xl text-burgundy dark:text-white mb-2 sm:mb-4">초정밀 맞춤형 추천</h3>
-                        <p class="text-[11px] sm:text-sm text-stone-600 dark:text-gray-400 leading-relaxed font-light">
+                        <p class="text-[11px] sm:text-sm text-stone-600 dark:text-gray-400 leading-relaxed font-light word-break-keep-all">
                             단순 지역 검색을 넘어, 누구와 가는지(성별/연령대별 선호도), 다이닝의 예산과 희망 요리 스타일까지 연동되어 사용자 만족도를 수치적으로 완벽하게 끌어올립니다.
                         </p>
                     </div>
@@ -379,7 +376,6 @@
         </div>
     </section>
 
-    <!-- Interactive Curator Section -->
     <section id="curator" class="py-16 sm:py-24 bg-burgundy-50 dark:bg-burgundy-950 relative overflow-hidden transition-colors duration-400">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.04)_0%,transparent_60%)] dark:bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.08)_0%,transparent_60%)] pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
@@ -387,7 +383,7 @@
             <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
                 <span class="font-enSerif text-burgundy dark:text-gold text-xs tracking-[0.25em] uppercase block mb-3">Interactive Experience</span>
                 <h2 class="font-serif text-xl sm:text-4xl text-burgundy dark:text-white mb-4 sm:mb-6">나의 맞춤 서울 테이블 찾기</h2>
-                <p class="text-stone-600 dark:text-gray-400 text-xs sm:text-sm font-light leading-relaxed">
+                <p class="text-stone-600 dark:text-gray-400 text-xs sm:text-sm font-light leading-relaxed word-break-keep-all">
                     예산, 지역, 동행하는 사람만 선택하세요. 가이드 평점 및 대중 선호도를 계산해 당신의 취향에 저격할 맞춤 테이블을 실시간 제안합니다.
                 </p>
             </div>
@@ -464,7 +460,7 @@
             <!-- Booking Promotion Area (CTA) -->
             <div class="mt-12 sm:mt-20 text-center max-w-2xl mx-auto px-4">
                 <h3 class="font-serif text-lg sm:text-2xl text-burgundy dark:text-white mb-3 sm:mb-4">지금, 서울에서 가장 완벽한 한 끼를 예약해 보세요</h3>
-                <p class="text-xs sm:text-sm text-stone-600 dark:text-gray-400 font-light mb-6 sm:mb-8 leading-relaxed">
+                <p class="text-xs sm:text-sm text-stone-600 dark:text-gray-400 font-light mb-6 sm:mb-8 leading-relaxed word-break-keep-all">
                     빅데이터 추천 알고리즘과 카테고리 매칭을 통해 소중한 순간에 걸맞은 예약 서비스를 완벽 지원합니다.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
@@ -483,7 +479,7 @@
             <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
                 <span class="font-enSerif text-burgundy dark:text-gold text-xs tracking-[0.25em] uppercase block mb-3">Gourmet Guestbook</span>
                 <h2 class="font-serif text-2xl sm:text-4xl text-burgundy dark:text-white mb-4 sm:mb-6">미식 방명록</h2>
-                <p class="text-stone-600 dark:text-gray-400 text-xs sm:text-sm font-light leading-relaxed">
+                <p class="text-stone-600 dark:text-gray-400 text-xs sm:text-sm font-light leading-relaxed word-break-keep-all">
                     서울의 숨겨진 테이블을 경험하고 느꼈던 영감을 자유롭게 남겨주세요. <br class="hidden sm:inline"> 방명록을 통해 미식 포인트를 누적하면 더욱 품격 있는 미식가 등급을 부여받습니다.
                 </p>
             </div>
@@ -504,12 +500,15 @@
 
                         <form id="guestbook-form" onsubmit="handleGuestbookSubmit(event)" class="space-y-4">
                             <div>
-                                <label class="block text-[11px] uppercase tracking-wider text-stone-400 dark:text-gray-500 font-semibold mb-2">작성자 명</label>
+                                <label class="block text-[11px] uppercase tracking-wider text-stone-400 dark:text-gray-500 font-semibold mb-2 flex justify-between">
+                                    <span>작성자 명</span>
+                                    <span class="text-[9px] text-stone-400 dark:text-gray-500 font-normal">정중한 닉네임 권장</span>
+                                </label>
                                 <input type="text" id="guest-name" required placeholder="예: 청담동 식객" class="w-full bg-stone-50 dark:bg-charcoal-light border border-stone-200 dark:border-gray-700 rounded-lg px-4 py-2.5 text-sm text-stone-800 dark:text-white focus:outline-none focus:border-burgundy dark:focus:border-gold premium-transition">
                             </div>
                             <div>
                                 <label class="block text-[11px] uppercase tracking-wider text-stone-400 dark:text-gray-500 font-semibold mb-2">미식 한줄 평</label>
-                                <textarea id="guest-content" required rows="3" placeholder="예: 민들레 영토 다이닝 코스 분위기가 엄청나네요! 강력 추천합니다." class="w-full bg-stone-50 dark:bg-charcoal-light border border-stone-200 dark:border-gray-700 rounded-lg px-4 py-2.5 text-sm text-stone-800 dark:text-white focus:outline-none focus:border-burgundy dark:focus:border-gold premium-transition resize-none"></textarea>
+                                <textarea id="guest-content" required rows="3" placeholder="예: 민들레 영토 코스 분위기가 엄청나네요! 강력 추천합니다." class="w-full bg-stone-50 dark:bg-charcoal-light border border-stone-200 dark:border-gray-700 rounded-lg px-4 py-2.5 text-sm text-stone-800 dark:text-white focus:outline-none focus:border-burgundy dark:focus:border-gold premium-transition resize-none"></textarea>
                             </div>
                             <button type="submit" class="w-full py-3 rounded bg-burgundy dark:bg-gradient-to-r dark:from-gold dark:via-gold-warm dark:to-gold text-white dark:text-burgundy-950 text-xs tracking-wider font-semibold uppercase hover:opacity-90 premium-transition">
                                 <i class="fa-regular fa-paper-plane mr-2"></i> 한줄평 등록 (+20 P)
@@ -532,7 +531,7 @@
 
     <!-- My Gourmet Tier Information Modal -->
     <div id="tier-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-charcoal border border-warmLight-border dark:border-gold max-w-md w-full rounded-lg p-6 sm:p-8 shadow-2xl relative">
+        <div class="bg-white dark:bg-charcoal border border-warmLight-border dark:border-gold max-w-md w-full rounded-lg p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button onclick="closeTierModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-600 dark:text-gray-500 dark:hover:text-white transition" aria-label="닫기">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
@@ -572,7 +571,7 @@
 
     <!-- Custom Modal instead of default browser alert/confirm -->
     <div id="custom-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-charcoal border border-warmLight-border dark:border-gold max-w-md w-full rounded-lg p-6 sm:p-8 shadow-2xl relative">
+        <div class="bg-white dark:bg-charcoal border border-warmLight-border dark:border-gold max-w-md w-full rounded-lg p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button onclick="closePremiumAlert()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-600 dark:text-gray-500 dark:hover:text-white transition" aria-label="닫기">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
@@ -581,7 +580,7 @@
                     <i class="fa-solid fa-envelope-open-text text-burgundy dark:text-gold"></i>
                 </div>
                 <h4 class="font-serif text-lg text-burgundy dark:text-white mb-2">실시간 제휴 알림 신청 완료</h4>
-                <p class="text-xs text-stone-500 dark:text-gray-400 mb-6 leading-relaxed">
+                <p class="text-xs text-stone-500 dark:text-gray-400 mb-6 leading-relaxed word-break-keep-all">
                     신청하신 선호 구역 및 타겟 조건에 부합하는 레스토랑의 실시간 빈자리 현황 및 캐치테이블 연동 링크가 알림톡으로 연동됩니다.
                 </p>
                 <button onclick="closePremiumAlert()" class="w-full py-2.5 bg-burgundy text-white dark:bg-gold dark:text-burgundy-950 font-semibold text-xs tracking-wider rounded uppercase hover:opacity-90 transition">
@@ -603,7 +602,7 @@
                         </div>
                         <span class="font-serif text-burgundy dark:text-gold tracking-widest text-base font-bold">서울미식회</span>
                     </div>
-                    <p class="text-xs text-stone-500 dark:text-gray-500 leading-relaxed max-w-sm mb-4">
+                    <p class="text-xs text-stone-500 dark:text-gray-500 leading-relaxed max-w-sm mb-4 word-break-keep-all">
                         서울의 숨어 있는 세계적 명작 다이닝부터 로컬 인증 레스토랑까지, 권위 있는 가이드와 철저한 대중 데이터로 선별하는 가장 신뢰할 수 있는 테이블 가이드.
                     </p>
                     <p class="text-[11px] text-stone-400 dark:text-gray-600">
@@ -614,7 +613,7 @@
                 <!-- Col 2: Brand Values -->
                 <div class="space-y-3 sm:space-y-4">
                     <h5 class="text-xs font-semibold uppercase text-burgundy dark:text-gold tracking-widest">브랜드 정신</h5>
-                    <p class="text-xs text-stone-500 dark:text-gray-500 leading-relaxed font-light">
+                    <p class="text-xs text-stone-500 dark:text-gray-500 leading-relaxed font-light word-break-keep-all">
                         우리는 주관적인 평가에 치우치지 않으며, 전통적인 가이드북의 깊이와 트렌디한 집단지성의 속도를 융합하여 미식가들에게 실패 없는 하루를 완성시켜 줍니다.
                     </p>
                 </div>
@@ -804,7 +803,7 @@
             const navPointsText = document.getElementById('nav-points-text');
 
             if (navTierBadge) {
-                navTierBadge.className = `inline-block w-2.5 h-2.5 rounded-full ${info.badgeColor} animate-pulse`;
+                navTierBadge.className = `inline-block w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full ${info.badgeColor} animate-pulse`;
             }
             if (navTierText) navTierText.textContent = info.title;
             if (navPointsText) navPointsText.textContent = `(${userPoints} P)`;
@@ -1126,7 +1125,7 @@
             }
         });
 
-        // Soft, Micro-Parallax Effect Logic
+        // Throttled soft Micro-Parallax Effect Logic
         let ticked = false;
         window.addEventListener('scroll', () => {
             if (!ticked) {
