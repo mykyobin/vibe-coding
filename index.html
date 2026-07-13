@@ -8,7 +8,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Nanum Myeongjo (KR Serif) & Playfair Display (EN Serif) -->
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght=700;800&family=Playfair+Display:ital,wght=0,600;1,400&display=swap" rel="stylesheet">
     <!-- FontAwesome for Premium Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -80,7 +80,7 @@
         body {
             transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
         }
-        /* Custom transitions for premium elements */
+        /* Custom transitions */
         .premium-transition {
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -99,18 +99,23 @@
             background: linear-gradient(
                 45deg,
                 transparent 45%,
-                rgba(212, 175, 55, 0.15) 50%,
+                rgba(212, 175, 55, 0.1) 50%,
                 transparent 55%
             );
             transform: rotate(45deg);
-            transition: transform 0.6s ease;
+            transition: transform 0.5s ease;
         }
         .shimmer:hover::after {
             transform: translate(50%, 50%) rotate(45deg);
         }
-        /* Keep-all text flow support for mobile screen sizes */
+        /* Avoid text overflow issues in keep-all on mobile */
         .word-break-keep-all {
             word-break: keep-all;
+        }
+        /* Smooth, Hardware-Accelerated Parallax Layer Tuning */
+        #parallax-bg-1, #parallax-bg-2, #parallax-text {
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
         }
         /* Custom Mobile Drawer Animation Support */
         #mobile-menu-drawer {
@@ -189,11 +194,11 @@
         <!-- Radial shadow overlay -->
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.04)_0%,rgba(252,251,250,1)_80%)] dark:bg-[radial-gradient(circle_at_center,rgba(74,14,23,0.15)_0%,rgba(17,19,23,1)_80%)] pointer-events-none transition-all duration-300"></div>
         
-        <!-- Elegant subtle graphic elements -->
-        <div class="absolute top-1/4 left-1/12 w-48 sm:w-96 h-48 sm:h-96 rounded-full bg-burgundy-900/5 dark:bg-burgundy-900/10 filter blur-2xl sm:blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-1/4 right-1/12 w-48 sm:w-96 h-48 sm:h-96 rounded-full bg-gold/5 filter blur-2xl sm:blur-3xl pointer-events-none"></div>
+        <!-- Elegant subtle graphic elements (Interactive Parallax Layers) -->
+        <div id="parallax-bg-1" class="absolute top-1/4 left-1/12 w-48 sm:w-96 h-48 sm:h-96 rounded-full bg-burgundy-900/5 dark:bg-burgundy-900/10 filter blur-2xl sm:blur-3xl pointer-events-none"></div>
+        <div id="parallax-bg-2" class="absolute bottom-1/4 right-1/12 w-48 sm:w-96 h-48 sm:h-96 rounded-full bg-gold/5 filter blur-2xl sm:blur-3xl pointer-events-none"></div>
 
-        <div class="max-w-4xl mx-auto text-center relative z-10 flex flex-col justify-center items-center h-full px-2 sm:px-4">
+        <div id="parallax-text" class="max-w-4xl mx-auto text-center relative z-10 flex flex-col justify-center items-center h-full px-2 sm:px-4">
             <!-- Ribbon Badge -->
             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-burgundy/20 dark:border-gold/30 bg-burgundy-50 dark:bg-burgundy-900/40 text-burgundy dark:text-gold text-[10px] sm:text-xs tracking-widest font-medium mb-6 sm:mb-8 animate-fade-in">
                 <i class="fa-solid fa-star text-[8px] sm:text-[10px]"></i>
@@ -362,7 +367,7 @@
         </div>
     </section>
 
-    <!-- Interactive Curator Section (Interactive simulator showing matching premium restaurants) -->
+    <!-- Interactive Curator Section -->
     <section id="curator" class="py-16 sm:py-24 bg-burgundy-50 dark:bg-burgundy-950 relative overflow-hidden transition-colors duration-400">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.04)_0%,transparent_60%)] dark:bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.08)_0%,transparent_60%)] pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
@@ -639,19 +644,17 @@
                 grid.className = "block text-center py-12";
                 grid.innerHTML = `
                     <div class="text-stone-400 dark:text-gray-500">
-                        <i class="fa-solid fa-folder-open text-4xl mb-4 text-burgundy dark:text-burgundy-700/60 animate-bounce"></i>
-                        <p class="font-serif text-base sm:text-lg mb-2 text-stone-800 dark:text-gray-300">매칭되는 테이블 정보가 부족합니다</p>
+                        <i class="fa-solid fa-folder-open text-4xl mb-4 text-burgundy dark:text-burgundy-700/60"></i>
+                        <p class="font-serif text-lg mb-2 text-stone-800 dark:text-gray-300">매칭되는 테이블 정보가 부족합니다</p>
                         <p class="text-xs max-w-sm mx-auto leading-relaxed">전체 서울 구역 혹은 다양한 장르를 골라 정밀 데이터를 통합 산정해 보세요.</p>
                     </div>
                 `;
                 return;
             }
 
-            // Using full responsiveness configurations for generated cards grid
-            grid.className = "grid grid-cols-1 sm:grid-cols-2 gap-6";
+            grid.className = "grid grid-cols-1 md:grid-cols-2 gap-6";
             data.forEach(item => {
                 const card = document.createElement('div');
-                // Added theme transitions to dynamic cards prevent background flashing
                 card.className = "bg-stone-50 dark:bg-charcoal-light border border-stone-200 dark:border-gray-800 hover:border-burgundy dark:hover:border-gold/30 rounded-lg overflow-hidden premium-transition flex flex-col sm:flex-row h-full";
                 
                 // Construct Guide Badges HTML
@@ -666,19 +669,19 @@
                 });
 
                 card.innerHTML = `
-                    <div class="w-full sm:w-2/5 relative h-44 sm:h-auto overflow-hidden">
+                    <div class="w-full sm:w-2/5 relative h-48 sm:h-auto overflow-hidden">
                         <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover premium-transition" onerror="this.src='https://placehold.co/400x300/2d080c/ffffff?text=Seoul+Table'">
                         <span class="absolute top-3 left-3 px-2.5 py-1 bg-burgundy text-white text-[10px] font-semibold tracking-wider rounded uppercase">${item.tag}</span>
                     </div>
-                    <div class="p-4 sm:p-5 sm:w-3/5 flex flex-col justify-between">
+                    <div class="p-5 sm:w-3/5 flex flex-col justify-between">
                         <div>
                             <div class="flex flex-wrap gap-1.5 mb-3">${badgesHtml}</div>
-                            <h4 class="font-serif text-base sm:text-lg text-burgundy dark:text-white mb-2 leading-snug">${item.name}</h4>
+                            <h4 class="font-serif text-lg text-burgundy dark:text-white mb-2 leading-snug">${item.name}</h4>
                             <p class="text-xs text-stone-500 dark:text-gray-400 font-light line-clamp-2 leading-relaxed mb-4">${item.highlights}</p>
                         </div>
                         <div class="flex items-center justify-between border-t border-stone-200 dark:border-gray-800/60 pt-3">
-                            <span class="text-[10px] sm:text-[11px] text-stone-500 dark:text-gray-500">평점 <strong>CatchTable ${item.catchtable}⭐</strong></span>
-                            <span class="text-[10px] sm:text-[11px] text-stone-400 dark:text-gray-600">리뷰 ${item.reviews}</span>
+                            <span class="text-[11px] text-stone-500 dark:text-gray-500">평점 <strong>CatchTable ${item.catchtable}⭐</strong></span>
+                            <span class="text-[11px] text-stone-400 dark:text-gray-600">리뷰 ${item.reviews}</span>
                         </div>
                     </div>
                 `;
@@ -695,7 +698,7 @@
             document.getElementById('custom-modal').classList.add('hidden');
         }
 
-        // Mobile Navigation Handlers with Elegant slide-in Animations
+        // Mobile Navigation Handlers
         const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
         const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -705,7 +708,6 @@
 
         function openMobileMenu() {
             mobileMenuOverlay.classList.remove('hidden');
-            // Give layout a tick to remove hidden before triggering fade/slide transition
             setTimeout(() => {
                 mobileMenuOverlay.classList.remove('opacity-0');
                 mobileMenuDrawer.classList.remove('translate-x-full');
@@ -715,7 +717,6 @@
         function closeMobileMenu() {
             mobileMenuOverlay.classList.add('opacity-0');
             mobileMenuDrawer.classList.add('translate-x-full');
-            // Wait for transitions to finish before adding hidden
             setTimeout(() => {
                 mobileMenuOverlay.classList.add('hidden');
             }, 300);
@@ -726,12 +727,12 @@
         mobileNavLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
         mobileNavCta.addEventListener('click', closeMobileMenu);
 
-        // Theme Toggle Handler with smooth background & text fade transitions
+        // Theme Toggle Handler
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeToggleIcon = document.getElementById('theme-toggle-icon');
         const htmlElement = document.documentElement;
 
-        // Apply theme preferences dynamically
+        // Check local storage or system preferences on load
         if (localStorage.getItem('theme') === 'light') {
             htmlElement.classList.remove('dark');
             themeToggleIcon.className = 'fa-solid fa-sun text-lg text-amber-500';
@@ -741,7 +742,6 @@
         }
 
         themeToggleBtn.addEventListener('click', () => {
-            // Added temporary transition lock to prevent any unwanted visual layout shifts during changes
             if (htmlElement.classList.contains('dark')) {
                 htmlElement.classList.remove('dark');
                 themeToggleIcon.className = 'fa-solid fa-sun text-lg text-amber-500';
@@ -753,7 +753,33 @@
             }
         });
 
-        // Init Event Listeners on DOM loaded
+        // Soft, Micro-Parallax Effect Logic
+        let ticked = false;
+        window.addEventListener('scroll', () => {
+            if (!ticked) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset || document.documentElement.scrollTop;
+                    const bg1 = document.getElementById('parallax-bg-1');
+                    const bg2 = document.getElementById('parallax-bg-2');
+                    const heroText = document.getElementById('parallax-text');
+                    
+                    // Hardware-accelerated 3D translations with extremely low ratios for a subtle float feel
+                    if (bg1) {
+                        bg1.style.transform = `translate3d(0, ${scrolled * 0.12}px, 0)`;
+                    }
+                    if (bg2) {
+                        bg2.style.transform = `translate3d(0, ${scrolled * -0.06}px, 0)`;
+                    }
+                    if (heroText) {
+                        heroText.style.transform = `translate3d(0, ${scrolled * 0.04}px, 0)`;
+                    }
+                    ticked = false;
+                });
+                ticked = true;
+            }
+        }, { passive: true });
+
+        // Init Event Listeners on load
         window.addEventListener('DOMContentLoaded', () => {
             // Initial filter run to show default recommended lists
             filterRestaurants();
