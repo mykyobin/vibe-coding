@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" class="dark">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Nanum Myeongjo (KR Serif) & Playfair Display (EN Serif) -->
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700;800&family=Playfair+Display:ital,wght=0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght=700;800&family=Playfair+Display:ital,wght=0,600;1,400&display=swap" rel="stylesheet">
     <!-- FontAwesome for Premium Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -19,15 +19,15 @@
                 extend: {
                     colors: {
                         burgundy: {
-                            950: '#1a0406',
-                            900: '#2d080c',
-                            800: '#420b11',
-                            700: '#5c1018',
-                            600: '#75141f',
-                            DEFAULT: '#4a0e17', // Primary Deep Burgundy
+                            950: '#210b03', // Elegant deep espresso-burnt orange for text contrast
+                            900: '#3e1305', // Deep terracotta-burnt orange
+                            800: '#5e1d08',
+                            700: '#872b0c',
+                            600: '#b33a10',
+                            DEFAULT: '#e0531c', // Premium Hermès / Terracotta Orange (Primary Accent)
                         },
                         gold: {
-                            light: '#f5e4bc',
+                            light: '#faf5eb', // Lighter soft cream sand
                             DEFAULT: '#d4af37', // Accent Champagne Gold
                             dark: '#aa841c',
                             warm: '#bca15a'
@@ -37,10 +37,10 @@
                             light: '#1f2228',
                         },
                         warmLight: {
-                            bg: '#fcfbfa', // High-end Creamy Alabaster Background
+                            bg: '#fdfaf5', // Luxurious creamy alabaster with warm apricot undertone
                             card: '#ffffff',
-                            border: '#e6e1da',
-                            text: '#221e1a'
+                            border: '#ece5da',
+                            text: '#2b211c' // Deep charcoal-espresso for optimal readability & warmth
                         }
                     },
                     fontFamily: {
@@ -68,7 +68,7 @@
             background: #f5f2eb;
         }
         ::-webkit-scrollbar-thumb {
-            background: #4a0e17;
+            background: #e0531c; /* Changed to Premium Orange */
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
@@ -301,8 +301,8 @@
 
                     <div class="relative rounded-lg overflow-hidden border border-warmLight-border dark:border-burgundy-800/30 group">
                         <div class="absolute inset-0 bg-gradient-to-t from-stone-900/90 to-transparent dark:from-burgundy-950/90 z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop" 
-                             alt="Luxury Food Styling" 
+                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop" 
+                             alt="Luxury Food Styling" 
                              class="w-full h-40 sm:h-64 object-cover object-center group-hover:scale-105 premium-transition"
                              onerror="this.src='https://placehold.co/1200x500/2a0408/ffffff?text=Premium+Dining+Space'">
                         <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 z-20">
@@ -473,7 +473,6 @@
         </div>
     </section>
 
-    <!-- Gourmet Guestbook Section -->
     <section id="guestbook" class="py-16 sm:py-24 bg-stone-50 dark:bg-charcoal/30 relative border-t border-stone-200 dark:border-gray-900/40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
@@ -559,6 +558,7 @@
                         <li class="flex justify-between"><span>✍️ 방명록 한줄평 등록</span> <span class="font-semibold text-emerald-500">+20 P</span></li>
                         <li class="flex justify-between"><span>🔍 실시간 큐레이션 매칭</span> <span class="font-semibold text-emerald-500">+5 P (일 최대 5회)</span></li>
                         <li class="flex justify-between"><span>📬 제휴 예약 신청</span> <span class="font-semibold text-emerald-500">+15 P</span></li>
+                        <li class="flex justify-between"><span>📍 미식 2차 코스 저장</span> <span class="font-semibold text-emerald-500">+10 P</span></li>
                     </ul>
                 </div>
 
@@ -643,7 +643,7 @@
     </footer>
 
     <script>
-        // Mock Premium Database for Seoul Restaurants representing different guides and crowdsourced scores
+        // Mock Premium Database for Seoul Restaurants representing different guides, crowdsourced scores and 2nd course navigators
         const restaurantDb = [
             {
                 name: "민들레 영토 다이닝 (한식 컨템포러리)",
@@ -655,7 +655,12 @@
                 reviews: "1,240개",
                 highlights: "모던하게 재해석한 반가 한식 코스, 프리미엄 전통주 페어링 특화",
                 img: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?q=80&w=400&auto=format&fit=crop",
-                tag: "데이트 추천 1위"
+                tag: "데이트 추천 1위",
+                course2nd: {
+                    name: "스피크이지 노아 (청담)",
+                    distance: "도보 4분",
+                    desc: "고풍스러운 책장 슬라이딩 도어 뒤에 숨겨진 비밀 수제 위스키 바"
+                }
             },
             {
                 name: "광화문 송림재",
@@ -667,7 +672,12 @@
                 reviews: "820개",
                 highlights: "3대째 내려오는 정통 반가 비법 갈비구이와 고풍스러운 한옥 룸",
                 img: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop",
-                tag: "비즈니스 특화"
+                tag: "비즈니스 특화",
+                course2nd: {
+                    name: "아날로그 정원 (서촌)",
+                    distance: "도보 7분",
+                    desc: "서촌 전통 고택을 감각적으로 리모델링한 프리미엄 수제 한옥 말차실"
+                }
             },
             {
                 name: "스시 마츠모토 세울",
@@ -679,7 +689,12 @@
                 reviews: "1,550개",
                 highlights: "일본 본토 명가와의 제휴로 구현한 명품 쥠스시와 오마카세",
                 img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=400&auto=format&fit=crop",
-                tag: "기념일 추천"
+                tag: "기념일 추천",
+                course2nd: {
+                    name: "바이닐 하우스 (압구정)",
+                    distance: "도보 5분",
+                    desc: "빈티지 하이엔드 오디오 시스템으로 명반을 감상하는 프라이빗 LP 청음 라운지"
+                }
             },
             {
                 name: "이태원 오스테리아 아미치",
@@ -691,7 +706,12 @@
                 reviews: "930개",
                 highlights: "직접 제면한 생면 파스타와 와인 페어링하기 가장 아늑한 공간",
                 img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=400&auto=format&fit=crop",
-                tag: "감성 인테리어"
+                tag: "감성 인테리어",
+                course2nd: {
+                    name: "선셋 라운지 (해방촌)",
+                    distance: "도보 3분",
+                    desc: "남산타워 뷰와 화려한 야경이 파노라마처럼 펼쳐지는 루프탑 칵테일 바"
+                }
             },
             {
                 name: "성수 플레르 프렌치",
@@ -703,7 +723,12 @@
                 reviews: "1,110개",
                 highlights: "제철 나물과 허브를 가미한 파리지앵 스타일의 가벼운 정통 프렌치",
                 img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=400&auto=format&fit=crop",
-                tag: "가족 행사 최적"
+                tag: "가족 행사 최적",
+                course2nd: {
+                    name: "센터커피 에디션 (성수)",
+                    distance: "도보 5분",
+                    desc: "서울숲 푸르른 자연을 통창으로 조망하며 만끽하는 스페셜티 브루잉 에디션"
+                }
             },
             {
                 name: "마포 고료리 류",
@@ -715,22 +740,27 @@
                 reviews: "750개",
                 highlights: "모던한 일본식 갓포 요리와 풍성한 프리미엄 가이세키 코스 제안",
                 img: "https://images.unsplash.com/photo-1611143669185-af224c5e3252?q=80&w=400&auto=format&fit=crop",
-                tag: "바이어 대접 추천"
+                tag: "바이어 대접 추천",
+                course2nd: {
+                    name: "기린야 (공덕)",
+                    distance: "도보 6분",
+                    desc: "공덕 한옥길 뒷골목에 숨겨진 정통 수제 하이볼 테이스팅 이자카야"
+                }
             }
         ];
 
-        // Theme Toggle Handler
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeToggleIcon = document.getElementById('theme-toggle-icon');
         const htmlElement = document.documentElement;
 
-        // Check local storage or system preferences on load
-        if (localStorage.getItem('theme') === 'light') {
-            htmlElement.classList.remove('dark');
-            themeToggleIcon.className = 'fa-solid fa-sun text-lg text-amber-500';
-        } else {
+        // Default to Light Mode on first load for the requested white & orange aesthetic
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
             htmlElement.classList.add('dark');
             themeToggleIcon.className = 'fa-solid fa-moon text-lg';
+        } else {
+            htmlElement.classList.remove('dark');
+            themeToggleIcon.className = 'fa-solid fa-sun text-lg text-amber-500';
         }
 
         themeToggleBtn.addEventListener('click', () => {
@@ -752,7 +782,6 @@
         let userPoints = parseInt(localStorage.getItem(POINTS_KEY)) || 0;
         let todaySearchCount = parseInt(localStorage.getItem(SEARCH_COUNT_KEY)) || 0;
 
-        // Custom Tier Mapping based on user achievements
         function getUserGradeInfo(points) {
             if (points >= 150) {
                 return {
@@ -787,7 +816,6 @@
             }
         }
 
-        // Add Points and dynamically recalculate levels
         function addPoints(amount) {
             userPoints += amount;
             localStorage.setItem(POINTS_KEY, userPoints);
@@ -797,7 +825,6 @@
         function updateUserUI() {
             const info = getUserGradeInfo(userPoints);
             
-            // Header elements updating
             const navTierBadge = document.getElementById('nav-tier-badge');
             const navTierText = document.getElementById('nav-tier-text');
             const navPointsText = document.getElementById('nav-points-text');
@@ -808,13 +835,11 @@
             if (navTierText) navTierText.textContent = info.title;
             if (navPointsText) navPointsText.textContent = `(${userPoints} P)`;
 
-            // Guestbook profile panel
             const formUserTier = document.getElementById('form-user-tier');
             if (formUserTier) {
                 formUserTier.innerHTML = `${info.title} <span class="text-[10px] font-sans px-1.5 py-0.5 rounded ml-2 ${info.color}">${userPoints} P</span>`;
             }
 
-            // Modal panel update
             const modalTitle = document.getElementById('tier-modal-title');
             const modalBadge = document.getElementById('tier-modal-badge');
             const modalPoints = document.getElementById('tier-modal-points');
@@ -833,7 +858,6 @@
                 medalIcon.className = `w-16 h-16 ${info.color.split(' ')[0]} rounded-full flex items-center justify-center mx-auto mb-4 text-3xl shadow-inner`;
             }
 
-            // Recalculating percentage for smooth progress bar animation
             let percent = 0;
             if (userPoints >= 150) {
                 percent = Math.min(100, ((userPoints - 150) / 150) * 100);
@@ -851,7 +875,6 @@
             }
         }
 
-        // Modal triggers
         const tierModal = document.getElementById('tier-modal');
         function openTierModal() {
             tierModal.classList.remove('hidden');
@@ -865,7 +888,6 @@
             tierStatusBtn.addEventListener('click', openTierModal);
         }
 
-        // Mobile Navigation Handlers
         const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
         const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -894,7 +916,6 @@
             link.addEventListener('click', closeMobileMenu);
         });
 
-        // Mock guestbook default values for initial visit
         const defaultGuestbook = [
             {
                 id: 1,
@@ -938,7 +959,6 @@
                 return;
             }
 
-            // Loop in reverse to present latest posts first
             guestbookData.slice().reverse().forEach(item => {
                 const dateText = item.timestamp || new Date().toLocaleDateString();
                 const card = document.createElement('div');
@@ -981,11 +1001,9 @@
             saveGuestbook();
             renderGuestbook();
 
-            // Clear inputs after post
             nameInput.value = '';
             contentInput.value = '';
 
-            // Add points & display custom check toast
             addPoints(20);
             
             const feedbackAlert = document.createElement('div');
@@ -995,13 +1013,11 @@
             setTimeout(() => feedbackAlert.remove(), 4000);
         }
 
-        // Function to perform real-time matching
         function filterRestaurants() {
             const selectedRegion = document.getElementById('sim-region').value;
             const selectedGenre = document.getElementById('sim-genre').value;
             const selectedCompanion = document.getElementById('sim-companion').value;
 
-            // Filtration mechanism
             const filtered = restaurantDb.filter(restaurant => {
                 const matchRegion = selectedRegion === 'all' || restaurant.region === selectedRegion;
                 const matchGenre = selectedGenre === 'all' || restaurant.genre === selectedGenre;
@@ -1011,7 +1027,6 @@
 
             renderResults(filtered);
             
-            // Increment search points system (Up to 5 times per day)
             let searches = parseInt(localStorage.getItem(SEARCH_COUNT_KEY)) || 0;
             if (searches < 5) {
                 searches++;
@@ -1026,7 +1041,31 @@
             }
         }
 
-        // Function to render matched data card components inside grid
+        function save2ndCourse(spotName) {
+            const savedCoursesKey = "seoul_gourmet_saved_courses";
+            let savedList = JSON.parse(localStorage.getItem(savedCoursesKey)) || [];
+            
+            if (savedList.includes(spotName)) {
+                const feedbackAlert = document.createElement('div');
+                feedbackAlert.className = "fixed bottom-5 right-5 bg-amber-500 text-white px-5 py-3 rounded-lg shadow-2xl flex items-center gap-3 z-50 text-xs font-semibold animate-shake";
+                feedbackAlert.innerHTML = `<i class="fa-solid fa-circle-info"></i> 이미 저장된 2차 미식 스팟입니다.`;
+                document.body.appendChild(feedbackAlert);
+                setTimeout(() => feedbackAlert.remove(), 3000);
+                return;
+            }
+
+            savedList.push(spotName);
+            localStorage.setItem(savedCoursesKey, JSON.stringify(savedList));
+            
+            addPoints(10);
+            
+            const feedbackAlert = document.createElement('div');
+            feedbackAlert.className = "fixed bottom-5 right-5 bg-emerald-500 text-white px-5 py-3 rounded-lg shadow-2xl flex items-center gap-3 z-50 text-xs font-semibold animate-bounce";
+            feedbackAlert.innerHTML = `<i class="fa-solid fa-bookmark"></i> [${spotName}] 코스 저장 완료! +10 미식 포인트 적립 📍`;
+            document.body.appendChild(feedbackAlert);
+            setTimeout(() => feedbackAlert.remove(), 4000);
+        }
+
         function renderResults(data) {
             const grid = document.getElementById('results-grid');
             const countLabel = document.getElementById('results-count');
@@ -1060,21 +1099,49 @@
                 });
 
                 const card = document.createElement('div');
-                card.className = "bg-stone-50 dark:bg-charcoal-light border border-stone-200 dark:border-gray-800 hover:border-burgundy dark:hover:border-gold/30 rounded-lg overflow-hidden premium-transition flex flex-col sm:flex-row h-full";
+                card.className = "bg-stone-50 dark:bg-charcoal-light border border-stone-200 dark:border-gray-800 hover:border-burgundy dark:hover:border-gold/30 rounded-lg overflow-hidden premium-transition flex flex-col h-full";
+                
                 card.innerHTML = `
-                    <div class="w-full sm:w-2/5 relative h-48 sm:h-auto overflow-hidden">
-                        <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover premium-transition" onerror="this.src='https://placehold.co/400x300/2d080c/ffffff?text=Seoul+Table'">
-                        <span class="absolute top-3 left-3 px-2.5 py-1 bg-burgundy text-white text-[10px] font-semibold tracking-wider rounded uppercase">${item.tag}</span>
-                    </div>
-                    <div class="p-5 sm:w-3/5 flex flex-col justify-between">
-                        <div>
-                            <div class="flex flex-wrap gap-1.5 mb-3">${badgesHtml}</div>
-                            <h4 class="font-serif text-lg text-burgundy dark:text-white mb-2 leading-snug">${item.name}</h4>
-                            <p class="text-xs text-stone-500 dark:text-gray-400 font-light line-clamp-2 leading-relaxed mb-4">${item.highlights}</p>
+                    <div class="flex flex-col sm:flex-row flex-grow">
+                        <div class="w-full sm:w-2/5 relative h-48 sm:h-auto overflow-hidden">
+                            <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover premium-transition" onerror="this.src='https://placehold.co/400x300/2d080c/ffffff?text=Seoul+Table'">
+                            <span class="absolute top-3 left-3 px-2.5 py-1 bg-burgundy text-white text-[10px] font-semibold tracking-wider rounded uppercase">${item.tag}</span>
                         </div>
-                        <div class="flex items-center justify-between border-t border-stone-200 dark:border-gray-800/60 pt-3">
-                            <span class="text-[11px] text-stone-500 dark:text-gray-500">평점 <strong>CatchTable ${item.catchtable}⭐</strong></span>
-                            <span class="text-[11px] text-stone-400 dark:text-gray-600">리뷰 ${item.reviews}</span>
+                        <div class="p-5 sm:w-3/5 flex flex-col justify-between">
+                            <div>
+                                <div class="flex flex-wrap gap-1.5 mb-3">${badgesHtml}</div>
+                                <h4 class="font-serif text-lg text-burgundy dark:text-white mb-2 leading-snug">${item.name}</h4>
+                                <p class="text-xs text-stone-500 dark:text-gray-400 font-light line-clamp-2 leading-relaxed mb-4">${item.highlights}</p>
+                            </div>
+                            <div class="flex items-center justify-between border-t border-stone-200 dark:border-gray-800/60 pt-3">
+                                <span class="text-[11px] text-stone-500 dark:text-gray-500">평점 <strong>CatchTable ${item.catchtable}⭐</strong></span>
+                                <span class="text-[11px] text-stone-400 dark:text-gray-600">리뷰 ${item.reviews}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Course Navigator Integration (Proposal [1]) -->
+                    <div class="px-5 pb-5 pt-3 border-t border-dashed border-stone-200 dark:border-gray-800/60 bg-stone-100/30 dark:bg-charcoal/10">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-[9px] font-bold bg-gold/10 text-gold dark:bg-gold/20 px-1.5 py-0.5 rounded flex items-center gap-1 uppercase tracking-wider">
+                                <i class="fa-solid fa-route text-[8px]"></i> Course Navigator
+                            </span>
+                            <span class="text-[10px] text-stone-400 dark:text-gray-500 font-medium">도보 10분 내 완벽한 2차 코스 제안</span>
+                        </div>
+                        <div class="flex items-start gap-2.5 bg-white/70 dark:bg-charcoal/40 p-3 rounded-lg border border-stone-200/40 dark:border-gray-800/40">
+                            <div class="w-2 h-2 rounded-full bg-gold dark:bg-gold-warm mt-1.5 animate-pulse flex-shrink-0"></div>
+                            <div class="flex-grow">
+                                <h5 class="text-xs font-semibold text-stone-800 dark:text-stone-200 flex items-center justify-between">
+                                    <span>${item.course2nd.name}</span>
+                                    <span class="text-[9px] font-normal text-stone-400 dark:text-gray-500 flex items-center gap-1">
+                                        <i class="fa-solid fa-walking"></i> ${item.course2nd.distance}
+                                    </span>
+                                </h5>
+                                <p class="text-[10px] text-stone-500 dark:text-gray-400 font-light mt-1">${item.course2nd.desc}</p>
+                                <button onclick="save2ndCourse('${item.course2nd.name}')" class="text-[9px] text-burgundy hover:text-burgundy-700 dark:text-gold dark:hover:text-gold-light mt-2 font-bold flex items-center gap-1 hover:underline focus:outline-none">
+                                    <i class="fa-regular fa-bookmark"></i> 이 코스 저장하기 (+10 P)
+                                </button>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -1093,10 +1160,8 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Initial filter run to show default recommended lists
             filterRestaurants();
 
-            // Bind click to search button
             const findBtn = document.getElementById('find-btn');
             if (findBtn) {
                 findBtn.addEventListener('click', () => {
@@ -1125,7 +1190,6 @@
             }
         });
 
-        // Throttled soft Micro-Parallax Effect Logic
         let ticked = false;
         window.addEventListener('scroll', () => {
             if (!ticked) {
