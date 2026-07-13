@@ -8,7 +8,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Nanum Myeongjo (KR Serif) & Playfair Display (EN Serif) -->
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght=700;800&family=Playfair+Display:ital,wght=0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700;800&family=Playfair+Display:ital,wght=0,600;1,400&display=swap" rel="stylesheet">
     <!-- FontAwesome for Premium Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -52,6 +52,7 @@
             }
         }
     </script>
+    
     <style>
         /* Custom scrollbar styling for premium look */
         ::-webkit-scrollbar {
@@ -125,7 +126,6 @@
 </head>
 <body class="bg-warmLight-bg text-warmLight-text dark:bg-charcoal dark:text-gray-200 font-sans selection:bg-gold selection:text-burgundy-950">
 
-    <!-- Premium Navigation -->
     <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-charcoal/90 backdrop-blur-md border-b border-warmLight-border dark:border-burgundy-800/30 premium-transition">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center gap-3">
@@ -143,10 +143,18 @@
                 <a href="#about" class="text-sm font-medium tracking-wide text-stone-600 hover:text-burgundy dark:text-gray-400 dark:hover:text-gold premium-transition">소개</a>
                 <a href="#features" class="text-sm font-medium tracking-wide text-stone-600 hover:text-burgundy dark:text-gray-400 dark:hover:text-gold premium-transition">매력포인트</a>
                 <a href="#curator" class="text-sm font-medium tracking-wide text-stone-600 hover:text-burgundy dark:text-gray-400 dark:hover:text-gold premium-transition">취향 시뮬레이터</a>
+                <a href="#guestbook" class="text-sm font-medium tracking-wide text-stone-600 hover:text-burgundy dark:text-gray-400 dark:hover:text-gold premium-transition">미식 방명록</a>
             </nav>
 
             <!-- Control Buttons (Theme Toggle + Action Button) -->
             <div class="flex items-center gap-2 sm:gap-4">
+                <!-- User Tier Badge (Floating Status Card Trigger) -->
+                <button id="tier-status-btn" class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-stone-200 dark:border-gold/30 bg-stone-50 dark:bg-burgundy-900/30 hover:bg-stone-100 dark:hover:bg-burgundy-900/50 transition-all text-xs font-semibold focus:outline-none">
+                    <span id="nav-tier-badge" class="inline-block w-2.5 h-2.5 rounded-full bg-amber-700 animate-pulse"></span>
+                    <span id="nav-tier-text" class="text-stone-700 dark:text-gold">브론즈 초보 식객</span>
+                    <span id="nav-points-text" class="text-[10px] text-stone-400 dark:text-gray-400 font-light">(0 P)</span>
+                </button>
+
                 <!-- Theme Toggler Button -->
                 <button id="theme-toggle" class="w-10 h-10 rounded-full border border-stone-300 dark:border-gold/40 flex items-center justify-center text-stone-600 dark:text-gold hover:bg-stone-100 dark:hover:bg-burgundy-900/40 transition-colors focus:outline-none" aria-label="화면 테마 변경">
                     <i id="theme-toggle-icon" class="fa-solid fa-moon text-lg"></i>
@@ -179,9 +187,13 @@
                     <a href="#about" class="mobile-nav-link text-base font-medium text-stone-700 dark:text-gray-300 hover:text-burgundy dark:hover:text-gold">소개</a>
                     <a href="#features" class="mobile-nav-link text-base font-medium text-stone-700 dark:text-gray-300 hover:text-burgundy dark:hover:text-gold">매력포인트</a>
                     <a href="#curator" class="mobile-nav-link text-base font-medium text-stone-700 dark:text-gray-300 hover:text-burgundy dark:hover:text-gold">취향 시뮬레이터</a>
+                    <a href="#guestbook" class="mobile-nav-link text-base font-medium text-stone-700 dark:text-gray-300 hover:text-burgundy dark:hover:text-gold">미식 방명록</a>
                 </nav>
             </div>
-            <div class="pt-6 border-t border-warmLight-border dark:border-burgundy-900/30">
+            <div class="pt-6 border-t border-warmLight-border dark:border-burgundy-900/30 space-y-3">
+                <button onclick="openTierModal(); closeMobileMenu();" class="w-full py-3 rounded border border-stone-200 dark:border-gold/30 text-stone-800 dark:text-gold text-xs font-semibold tracking-wider flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-medal"></i> 나의 미식 등급 정보
+                </button>
                 <a href="#curator" id="mobile-nav-cta" class="block text-center w-full py-3.5 rounded bg-burgundy dark:bg-gradient-to-r dark:from-gold dark:via-gold-warm dark:to-gold text-white dark:text-burgundy-950 text-xs tracking-wider font-semibold uppercase">
                     나의 테이블 찾기
                 </a>
@@ -465,6 +477,99 @@
         </div>
     </section>
 
+    <!-- Gourmet Guestbook Section -->
+    <section id="guestbook" class="py-16 sm:py-24 bg-stone-50 dark:bg-charcoal/30 relative border-t border-stone-200 dark:border-gray-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+                <span class="font-enSerif text-burgundy dark:text-gold text-xs tracking-[0.25em] uppercase block mb-3">Gourmet Guestbook</span>
+                <h2 class="font-serif text-2xl sm:text-4xl text-burgundy dark:text-white mb-4 sm:mb-6">미식 방명록</h2>
+                <p class="text-stone-600 dark:text-gray-400 text-xs sm:text-sm font-light leading-relaxed">
+                    서울의 숨겨진 테이블을 경험하고 느꼈던 영감을 자유롭게 남겨주세요. <br class="hidden sm:inline"> 방명록을 통해 미식 포인트를 누적하면 더욱 품격 있는 미식가 등급을 부여받습니다.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-5xl mx-auto">
+                <!-- Left: Post Form -->
+                <div class="lg:col-span-5 bg-white dark:bg-charcoal border border-warmLight-border dark:border-gray-800 p-6 rounded-xl shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <div id="form-user-avatar" class="w-10 h-10 rounded-full bg-amber-700/20 text-amber-700 dark:bg-amber-700/30 dark:text-gold flex items-center justify-center text-lg font-semibold">
+                                <i class="fa-solid fa-signature"></i>
+                            </div>
+                            <div class="leading-none">
+                                <span class="text-[10px] text-stone-400 dark:text-gray-500 uppercase block mb-1">Your Profile Level</span>
+                                <span id="form-user-tier" class="text-sm font-serif font-semibold text-burgundy dark:text-gold">브론즈 초보 식객</span>
+                            </div>
+                        </div>
+
+                        <form id="guestbook-form" onsubmit="handleGuestbookSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-[11px] uppercase tracking-wider text-stone-400 dark:text-gray-500 font-semibold mb-2">작성자 명</label>
+                                <input type="text" id="guest-name" required placeholder="예: 청담동 식객" class="w-full bg-stone-50 dark:bg-charcoal-light border border-stone-200 dark:border-gray-700 rounded-lg px-4 py-2.5 text-sm text-stone-800 dark:text-white focus:outline-none focus:border-burgundy dark:focus:border-gold premium-transition">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] uppercase tracking-wider text-stone-400 dark:text-gray-500 font-semibold mb-2">미식 한줄 평</label>
+                                <textarea id="guest-content" required rows="3" placeholder="예: 민들레 영토 다이닝 코스 분위기가 엄청나네요! 강력 추천합니다." class="w-full bg-stone-50 dark:bg-charcoal-light border border-stone-200 dark:border-gray-700 rounded-lg px-4 py-2.5 text-sm text-stone-800 dark:text-white focus:outline-none focus:border-burgundy dark:focus:border-gold premium-transition resize-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-3 rounded bg-burgundy dark:bg-gradient-to-r dark:from-gold dark:via-gold-warm dark:to-gold text-white dark:text-burgundy-950 text-xs tracking-wider font-semibold uppercase hover:opacity-90 premium-transition">
+                                <i class="fa-regular fa-paper-plane mr-2"></i> 한줄평 등록 (+20 P)
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-stone-100 dark:border-gray-800/60 text-center">
+                        <span class="text-[10px] text-stone-400 dark:text-gray-500"><i class="fa-solid fa-shield-halved mr-1"></i> 방명록은 브라우저의 로컬 저장소(localStorage)에 안전하게 저장됩니다.</span>
+                    </div>
+                </div>
+
+                <!-- Right: Message Feed -->
+                <div class="lg:col-span-7 space-y-4 max-h-[480px] overflow-y-auto pr-2" id="guestbook-feed">
+                    <!-- Guestbook entries will render dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Gourmet Tier Information Modal -->
+    <div id="tier-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-charcoal border border-warmLight-border dark:border-gold max-w-md w-full rounded-lg p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeTierModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-600 dark:text-gray-500 dark:hover:text-white transition" aria-label="닫기">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center">
+                <div id="tier-medal-icon" class="w-16 h-16 bg-amber-700/10 dark:bg-amber-700/20 text-amber-700 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl shadow-inner">
+                    <i class="fa-solid fa-medal"></i>
+                </div>
+                <span id="tier-modal-badge" class="px-3 py-1 rounded-full text-[10px] tracking-widest font-semibold bg-amber-700/10 text-amber-800 dark:bg-amber-700/20 dark:text-amber-500 uppercase">BRONZE CLASS</span>
+                <h4 id="tier-modal-title" class="font-serif text-xl text-burgundy dark:text-white mt-3 mb-1">초보 식객</h4>
+                <p class="text-[11px] text-stone-500 dark:text-gray-400 mb-6">다양한 활동을 통해 미식 포인트를 쌓고 높은 등급을 쟁취해보세요!</p>
+                
+                <!-- Level Progress bar -->
+                <div class="bg-stone-100 dark:bg-charcoal-light rounded-full h-3.5 mb-2 overflow-hidden relative border border-stone-200 dark:border-gray-800">
+                    <div id="tier-progress" class="bg-amber-700 h-full rounded-full transition-all duration-500" style="width: 20%;"></div>
+                </div>
+                <div class="flex justify-between text-[11px] text-stone-500 dark:text-gray-400 mb-6">
+                    <span id="tier-modal-points">현재: 10 P</span>
+                    <span id="tier-modal-next">다음 등급까지: 40 P 필요</span>
+                </div>
+
+                <!-- Point Guide Rules -->
+                <div class="text-left text-xs bg-stone-50 dark:bg-charcoal-light p-4 rounded border border-stone-100 dark:border-gray-800 mb-6">
+                    <span class="font-semibold text-burgundy dark:text-gold block mb-2"><i class="fa-solid fa-circle-info mr-1"></i> 미식 포인트 획득 규칙</span>
+                    <ul class="space-y-1.5 text-stone-600 dark:text-gray-400 font-light">
+                        <li class="flex justify-between"><span>✍️ 방명록 한줄평 등록</span> <span class="font-semibold text-emerald-500">+20 P</span></li>
+                        <li class="flex justify-between"><span>🔍 실시간 큐레이션 매칭</span> <span class="font-semibold text-emerald-500">+5 P (일 최대 5회)</span></li>
+                        <li class="flex justify-between"><span>📬 제휴 예약 신청</span> <span class="font-semibold text-emerald-500">+15 P</span></li>
+                    </ul>
+                </div>
+
+                <button onclick="closeTierModal()" class="w-full py-2.5 bg-burgundy text-white dark:bg-gold dark:text-burgundy-950 font-semibold text-xs tracking-wider rounded uppercase hover:opacity-90 transition">
+                    확인
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Custom Modal instead of default browser alert/confirm -->
     <div id="custom-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white dark:bg-charcoal border border-warmLight-border dark:border-gold max-w-md w-full rounded-lg p-6 sm:p-8 shadow-2xl relative">
@@ -475,8 +580,8 @@
                 <div class="w-12 h-12 bg-burgundy/10 dark:bg-burgundy rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="fa-solid fa-envelope-open-text text-burgundy dark:text-gold"></i>
                 </div>
-                <h4 class="font-serif text-base sm:text-lg text-burgundy dark:text-white mb-2">실시간 제휴 알림 신청 완료</h4>
-                <p class="text-[11px] sm:text-xs text-stone-500 dark:text-gray-400 mb-6 leading-relaxed">
+                <h4 class="font-serif text-lg text-burgundy dark:text-white mb-2">실시간 제휴 알림 신청 완료</h4>
+                <p class="text-xs text-stone-500 dark:text-gray-400 mb-6 leading-relaxed">
                     신청하신 선호 구역 및 타겟 조건에 부합하는 레스토랑의 실시간 빈자리 현황 및 캐치테이블 연동 링크가 알림톡으로 연동됩니다.
                 </p>
                 <button onclick="closePremiumAlert()" class="w-full py-2.5 bg-burgundy text-white dark:bg-gold dark:text-burgundy-950 font-semibold text-xs tracking-wider rounded uppercase hover:opacity-90 transition">
@@ -615,118 +720,6 @@
             }
         ];
 
-        // Function to perform real-time matching
-        function filterRestaurants() {
-            const selectedRegion = document.getElementById('sim-region').value;
-            const selectedGenre = document.getElementById('sim-genre').value;
-            const selectedCompanion = document.getElementById('sim-companion').value;
-
-            // Filtration mechanism
-            const filtered = restaurantDb.filter(restaurant => {
-                const matchRegion = selectedRegion === 'all' || restaurant.region === selectedRegion;
-                const matchGenre = selectedGenre === 'all' || restaurant.genre === selectedGenre;
-                const matchCompanion = selectedCompanion === 'all' || restaurant.companion === selectedCompanion;
-                return matchRegion && matchGenre && matchCompanion;
-            });
-
-            renderResults(filtered);
-        }
-
-        // Function to render matched data card components inside grid
-        function renderResults(data) {
-            const grid = document.getElementById('results-grid');
-            const countLabel = document.getElementById('results-count');
-            
-            grid.innerHTML = '';
-            countLabel.textContent = `조건 매칭 ${data.length}개 발견됨`;
-
-            if (data.length === 0) {
-                grid.className = "block text-center py-12";
-                grid.innerHTML = `
-                    <div class="text-stone-400 dark:text-gray-500">
-                        <i class="fa-solid fa-folder-open text-4xl mb-4 text-burgundy dark:text-burgundy-700/60"></i>
-                        <p class="font-serif text-lg mb-2 text-stone-800 dark:text-gray-300">매칭되는 테이블 정보가 부족합니다</p>
-                        <p class="text-xs max-w-sm mx-auto leading-relaxed">전체 서울 구역 혹은 다양한 장르를 골라 정밀 데이터를 통합 산정해 보세요.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            grid.className = "grid grid-cols-1 md:grid-cols-2 gap-6";
-            data.forEach(item => {
-                const card = document.createElement('div');
-                card.className = "bg-stone-50 dark:bg-charcoal-light border border-stone-200 dark:border-gray-800 hover:border-burgundy dark:hover:border-gold/30 rounded-lg overflow-hidden premium-transition flex flex-col sm:flex-row h-full";
-                
-                // Construct Guide Badges HTML
-                let badgesHtml = '';
-                item.guides.forEach(g => {
-                    let colorClass = 'bg-stone-200 text-stone-700 dark:bg-gray-800 dark:text-gray-300';
-                    if (g.includes('미슐랭')) colorClass = 'bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/80 dark:text-red-300 dark:border-red-800/40';
-                    if (g.includes('블루리본')) colorClass = 'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/80 dark:text-blue-300 dark:border-blue-800/40';
-                    if (g.includes('Taste')) colorClass = 'bg-burgundy/5 text-burgundy border border-burgundy/20 dark:bg-gold/10 dark:text-gold dark:border-gold/30';
-                    
-                    badgesHtml += `<span class="px-2 py-0.5 rounded text-[10px] font-medium tracking-tight ${colorClass}">${g}</span>`;
-                });
-
-                card.innerHTML = `
-                    <div class="w-full sm:w-2/5 relative h-48 sm:h-auto overflow-hidden">
-                        <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover premium-transition" onerror="this.src='https://placehold.co/400x300/2d080c/ffffff?text=Seoul+Table'">
-                        <span class="absolute top-3 left-3 px-2.5 py-1 bg-burgundy text-white text-[10px] font-semibold tracking-wider rounded uppercase">${item.tag}</span>
-                    </div>
-                    <div class="p-5 sm:w-3/5 flex flex-col justify-between">
-                        <div>
-                            <div class="flex flex-wrap gap-1.5 mb-3">${badgesHtml}</div>
-                            <h4 class="font-serif text-lg text-burgundy dark:text-white mb-2 leading-snug">${item.name}</h4>
-                            <p class="text-xs text-stone-500 dark:text-gray-400 font-light line-clamp-2 leading-relaxed mb-4">${item.highlights}</p>
-                        </div>
-                        <div class="flex items-center justify-between border-t border-stone-200 dark:border-gray-800/60 pt-3">
-                            <span class="text-[11px] text-stone-500 dark:text-gray-500">평점 <strong>CatchTable ${item.catchtable}⭐</strong></span>
-                            <span class="text-[11px] text-stone-400 dark:text-gray-600">리뷰 ${item.reviews}</span>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // Modal Handlers
-        function openPremiumAlert() {
-            document.getElementById('custom-modal').classList.remove('hidden');
-        }
-
-        function closePremiumAlert() {
-            document.getElementById('custom-modal').classList.add('hidden');
-        }
-
-        // Mobile Navigation Handlers
-        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-        const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenuClose = document.getElementById('mobile-menu-close');
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-        const mobileNavCta = document.getElementById('mobile-nav-cta');
-
-        function openMobileMenu() {
-            mobileMenuOverlay.classList.remove('hidden');
-            setTimeout(() => {
-                mobileMenuOverlay.classList.remove('opacity-0');
-                mobileMenuDrawer.classList.remove('translate-x-full');
-            }, 50);
-        }
-
-        function closeMobileMenu() {
-            mobileMenuOverlay.classList.add('opacity-0');
-            mobileMenuDrawer.classList.add('translate-x-full');
-            setTimeout(() => {
-                mobileMenuOverlay.classList.add('hidden');
-            }, 300);
-        }
-
-        mobileMenuBtn.addEventListener('click', openMobileMenu);
-        mobileMenuClose.addEventListener('click', closeMobileMenu);
-        mobileNavLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
-        mobileNavCta.addEventListener('click', closeMobileMenu);
-
         // Theme Toggle Handler
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeToggleIcon = document.getElementById('theme-toggle-icon');
@@ -753,6 +746,386 @@
             }
         });
 
+        const POINTS_KEY = "seoul_gourmet_points";
+        const GUESTBOOK_KEY = "seoul_gourmet_guestbook";
+        const SEARCH_COUNT_KEY = "seoul_gourmet_search_count";
+
+        let userPoints = parseInt(localStorage.getItem(POINTS_KEY)) || 0;
+        let todaySearchCount = parseInt(localStorage.getItem(SEARCH_COUNT_KEY)) || 0;
+
+        // Custom Tier Mapping based on user achievements
+        function getUserGradeInfo(points) {
+            if (points >= 150) {
+                return {
+                    name: "골드 미식가",
+                    title: "전설의 미식가 👑",
+                    color: "bg-yellow-50 text-yellow-800 dark:bg-yellow-950/80 dark:text-yellow-300 dark:border-yellow-800/40 border border-yellow-200",
+                    badgeColor: "bg-yellow-500",
+                    badgeClass: "GOLD CLASS",
+                    max: 300,
+                    icon: "fa-solid fa-crown text-yellow-500"
+                };
+            } else if (points >= 50) {
+                return {
+                    name: "실버 미식가",
+                    title: "진정한 식도락가 🥈",
+                    color: "bg-slate-50 text-slate-800 dark:bg-slate-900/80 dark:text-slate-300 dark:border-slate-800/40 border border-slate-200",
+                    badgeColor: "bg-slate-400",
+                    badgeClass: "SILVER CLASS",
+                    max: 150,
+                    icon: "fa-solid fa-award text-slate-400"
+                };
+            } else {
+                return {
+                    name: "브론즈 미식가",
+                    title: "초보 식객 🥉",
+                    color: "bg-amber-50 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 dark:border-amber-800/40 border border-amber-200",
+                    badgeColor: "bg-amber-700",
+                    badgeClass: "BRONZE CLASS",
+                    max: 50,
+                    icon: "fa-solid fa-medal text-amber-700"
+                };
+            }
+        }
+
+        // Add Points and dynamically recalculate levels
+        function addPoints(amount) {
+            userPoints += amount;
+            localStorage.setItem(POINTS_KEY, userPoints);
+            updateUserUI();
+        }
+
+        function updateUserUI() {
+            const info = getUserGradeInfo(userPoints);
+            
+            // Header elements updating
+            const navTierBadge = document.getElementById('nav-tier-badge');
+            const navTierText = document.getElementById('nav-tier-text');
+            const navPointsText = document.getElementById('nav-points-text');
+
+            if (navTierBadge) {
+                navTierBadge.className = `inline-block w-2.5 h-2.5 rounded-full ${info.badgeColor} animate-pulse`;
+            }
+            if (navTierText) navTierText.textContent = info.title;
+            if (navPointsText) navPointsText.textContent = `(${userPoints} P)`;
+
+            // Guestbook profile panel
+            const formUserTier = document.getElementById('form-user-tier');
+            if (formUserTier) {
+                formUserTier.innerHTML = `${info.title} <span class="text-[10px] font-sans px-1.5 py-0.5 rounded ml-2 ${info.color}">${userPoints} P</span>`;
+            }
+
+            // Modal panel update
+            const modalTitle = document.getElementById('tier-modal-title');
+            const modalBadge = document.getElementById('tier-modal-badge');
+            const modalPoints = document.getElementById('tier-modal-points');
+            const modalNext = document.getElementById('tier-modal-next');
+            const progressBar = document.getElementById('tier-progress');
+            const medalIcon = document.getElementById('tier-medal-icon');
+
+            if (modalTitle) modalTitle.textContent = info.title;
+            if (modalBadge) {
+                modalBadge.textContent = info.badgeClass;
+                modalBadge.className = `px-3 py-1 rounded-full text-[10px] tracking-widest font-semibold ${info.color} uppercase`;
+            }
+            if (modalPoints) modalPoints.textContent = `현재: ${userPoints} P`;
+            if (medalIcon) {
+                medalIcon.innerHTML = `<i class="${info.icon} text-3xl"></i>`;
+                medalIcon.className = `w-16 h-16 ${info.color.split(' ')[0]} rounded-full flex items-center justify-center mx-auto mb-4 text-3xl shadow-inner`;
+            }
+
+            // Recalculating percentage for smooth progress bar animation
+            let percent = 0;
+            if (userPoints >= 150) {
+                percent = Math.min(100, ((userPoints - 150) / 150) * 100);
+                if (modalNext) modalNext.textContent = userPoints >= 300 ? "최고 미식가 등급 달성!" : `다음 마일스톤까지: ${300 - userPoints} P`;
+            } else if (userPoints >= 50) {
+                percent = ((userPoints - 50) / 100) * 100;
+                if (modalNext) modalNext.textContent = `다음 등급까지: ${150 - userPoints} P 필요`;
+            } else {
+                percent = (userPoints / 50) * 100;
+                if (modalNext) modalNext.textContent = `다음 등급까지: ${50 - userPoints} P 필요`;
+            }
+            if (progressBar) {
+                progressBar.style.width = `${percent}%`;
+                progressBar.className = `h-full rounded-full transition-all duration-500 ${info.badgeColor}`;
+            }
+        }
+
+        // Modal triggers
+        const tierModal = document.getElementById('tier-modal');
+        function openTierModal() {
+            tierModal.classList.remove('hidden');
+        }
+        function closeTierModal() {
+            tierModal.classList.add('hidden');
+        }
+
+        const tierStatusBtn = document.getElementById('tier-status-btn');
+        if (tierStatusBtn) {
+            tierStatusBtn.addEventListener('click', openTierModal);
+        }
+
+        // Mobile Navigation Handlers
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function openMobileMenu() {
+            mobileMenuOverlay.classList.remove('hidden');
+            setTimeout(() => {
+                mobileMenuOverlay.classList.remove('opacity-0');
+                mobileMenuDrawer.classList.remove('translate-x-full');
+            }, 50);
+        }
+
+        function closeMobileMenu() {
+            mobileMenuOverlay.classList.add('opacity-0');
+            mobileMenuDrawer.classList.add('translate-x-full');
+            setTimeout(() => {
+                mobileMenuOverlay.classList.add('hidden');
+            }, 300);
+        }
+
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileMenu);
+        if (mobileMenuClose) mobileMenuClose.addEventListener('click', closeMobileMenu);
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Mock guestbook default values for initial visit
+        const defaultGuestbook = [
+            {
+                id: 1,
+                name: "미식 보헤미안",
+                content: "한남동 오스테리아 아미치 다녀왔는데, 생면 생생한 식감이 대단하더군요. 큐레이터 선택에서 목적에 비즈니스/연인을 분리한 것도 기가막힙니다. 유용하게 잘 쓰겠습니다.",
+                timestamp: "2026. 02. 12",
+                grade: "실버 미식가",
+                title: "진정한 식도락가 🥈",
+                badgeClass: "bg-slate-50 text-slate-800 dark:bg-slate-900/80 dark:text-slate-300 dark:border-slate-800/40 border border-slate-200"
+            },
+            {
+                id: 2,
+                name: "테이블 마스터",
+                content: "민들레 영토 다이닝 전통주 페어링 꼭 해보세요! 미슐랭 별점에 카카오/네이버 집단 지성이 합산된 게 한눈에 보여서 믿음이 갑니다. 새로고침해도 방명록이랑 등급이 남는 것도 재밌네요.",
+                timestamp: "2026. 02. 10",
+                grade: "골드 미식가",
+                title: "전설의 미식가 👑",
+                badgeClass: "bg-yellow-50 text-yellow-800 dark:bg-yellow-950/80 dark:text-yellow-300 dark:border-yellow-800/40 border border-yellow-200"
+            }
+        ];
+
+        let guestbookData = JSON.parse(localStorage.getItem(GUESTBOOK_KEY)) || defaultGuestbook;
+
+        function saveGuestbook() {
+            localStorage.setItem(GUESTBOOK_KEY, JSON.stringify(guestbookData));
+        }
+
+        function renderGuestbook() {
+            const feed = document.getElementById('guestbook-feed');
+            if (!feed) return;
+
+            feed.innerHTML = '';
+            
+            if (guestbookData.length === 0) {
+                feed.innerHTML = `
+                    <div class="text-center py-12 bg-stone-50 dark:bg-charcoal/50 border border-dashed border-stone-200 dark:border-gray-800 rounded-lg">
+                        <i class="fa-regular fa-comment-dots text-4xl mb-3 text-stone-300"></i>
+                        <p class="text-sm text-stone-500">등록된 방명록이 없습니다. 첫 발자취를 남겨주세요!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Loop in reverse to present latest posts first
+            guestbookData.slice().reverse().forEach(item => {
+                const dateText = item.timestamp || new Date().toLocaleDateString();
+                const card = document.createElement('div');
+                card.className = "bg-white dark:bg-charcoal border border-stone-200 dark:border-gray-800/60 p-5 rounded-lg shadow-sm premium-transition";
+                
+                card.innerHTML = `
+                    <div class="flex items-center justify-between gap-2 flex-wrap mb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="font-serif font-bold text-sm text-burgundy dark:text-gold">${item.name}</span>
+                            <span class="text-[10px] font-sans px-1.5 py-0.5 rounded ${item.badgeClass || 'bg-stone-100 text-stone-700'}">${item.title || '초보 식객 🥉'}</span>
+                        </div>
+                        <span class="text-[10px] text-stone-400 dark:text-gray-500">${dateText}</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-stone-600 dark:text-gray-300 leading-relaxed font-light">${item.content}</p>
+                `;
+                feed.appendChild(card);
+            });
+        }
+
+        function handleGuestbookSubmit(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById('guest-name');
+            const contentInput = document.getElementById('guest-content');
+
+            if (!nameInput.value.trim() || !contentInput.value.trim()) return;
+
+            const userGrade = getUserGradeInfo(userPoints);
+
+            const newItem = {
+                id: Date.now(),
+                name: nameInput.value.trim(),
+                content: contentInput.value.trim(),
+                timestamp: new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }),
+                grade: userGrade.name,
+                title: userGrade.title,
+                badgeClass: userGrade.color
+            };
+
+            guestbookData.push(newItem);
+            saveGuestbook();
+            renderGuestbook();
+
+            // Clear inputs after post
+            nameInput.value = '';
+            contentInput.value = '';
+
+            // Add points & display custom check toast
+            addPoints(20);
+            
+            const feedbackAlert = document.createElement('div');
+            feedbackAlert.className = "fixed bottom-5 right-5 bg-emerald-500 text-white px-5 py-3 rounded-lg shadow-2xl flex items-center gap-3 z-50 text-xs font-semibold animate-bounce";
+            feedbackAlert.innerHTML = `<i class="fa-solid fa-circle-check"></i> 방명록 등록 완료! +20 미식 포인트 적립 🎉`;
+            document.body.appendChild(feedbackAlert);
+            setTimeout(() => feedbackAlert.remove(), 4000);
+        }
+
+        // Function to perform real-time matching
+        function filterRestaurants() {
+            const selectedRegion = document.getElementById('sim-region').value;
+            const selectedGenre = document.getElementById('sim-genre').value;
+            const selectedCompanion = document.getElementById('sim-companion').value;
+
+            // Filtration mechanism
+            const filtered = restaurantDb.filter(restaurant => {
+                const matchRegion = selectedRegion === 'all' || restaurant.region === selectedRegion;
+                const matchGenre = selectedGenre === 'all' || restaurant.genre === selectedGenre;
+                const matchCompanion = selectedCompanion === 'all' || restaurant.companion === selectedCompanion;
+                return matchRegion && matchGenre && matchCompanion;
+            });
+
+            renderResults(filtered);
+            
+            // Increment search points system (Up to 5 times per day)
+            let searches = parseInt(localStorage.getItem(SEARCH_COUNT_KEY)) || 0;
+            if (searches < 5) {
+                searches++;
+                localStorage.setItem(SEARCH_COUNT_KEY, searches);
+                addPoints(5);
+                
+                const feedbackAlert = document.createElement('div');
+                feedbackAlert.className = "fixed bottom-5 right-5 bg-burgundy dark:bg-gold text-white dark:text-burgundy-950 px-5 py-3 rounded-lg shadow-2xl flex items-center gap-3 z-50 text-xs font-semibold animate-pulse";
+                feedbackAlert.innerHTML = `<i class="fa-solid fa-compass"></i> 취향 시뮬레이션 활용 완료! +5 미식 포인트 적립 🍽️`;
+                document.body.appendChild(feedbackAlert);
+                setTimeout(() => feedbackAlert.remove(), 3000);
+            }
+        }
+
+        // Function to render matched data card components inside grid
+        function renderResults(data) {
+            const grid = document.getElementById('results-grid');
+            const countLabel = document.getElementById('results-count');
+            
+            if (!grid || !countLabel) return;
+            grid.innerHTML = '';
+            countLabel.textContent = `조건 매칭 ${data.length}개 발견됨`;
+
+            if (data.length === 0) {
+                grid.className = "block text-center py-12";
+                grid.innerHTML = `
+                    <div class="text-stone-400 dark:text-gray-500">
+                        <i class="fa-solid fa-folder-open text-4xl mb-4 text-burgundy dark:text-burgundy-700/60"></i>
+                        <p class="font-serif text-lg mb-2 text-stone-800 dark:text-gray-300">매칭되는 테이블 정보가 부족합니다</p>
+                        <p class="text-xs max-w-sm mx-auto leading-relaxed">전체 서울 구역 혹은 다양한 장르를 골라 정밀 데이터를 통합 산정해 보세요.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.className = "grid grid-cols-1 md:grid-cols-2 gap-6";
+            data.forEach(item => {
+                let badgesHtml = '';
+                item.guides.forEach(g => {
+                    let colorClass = 'bg-stone-200 text-stone-700 dark:bg-gray-800 dark:text-gray-300';
+                    if (g.includes('미슐랭')) colorClass = 'bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/80 dark:text-red-300 dark:border-red-800/40';
+                    if (g.includes('블루리본')) colorClass = 'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/80 dark:text-blue-300 dark:border-blue-800/40';
+                    if (g.includes('Taste')) colorClass = 'bg-burgundy/5 text-burgundy border border-burgundy/20 dark:bg-gold/10 dark:text-gold dark:border-gold/30';
+                    
+                    badgesHtml += `<span class="px-2 py-0.5 rounded text-[10px] font-medium tracking-tight ${colorClass}">${g}</span>`;
+                });
+
+                const card = document.createElement('div');
+                card.className = "bg-stone-50 dark:bg-charcoal-light border border-stone-200 dark:border-gray-800 hover:border-burgundy dark:hover:border-gold/30 rounded-lg overflow-hidden premium-transition flex flex-col sm:flex-row h-full";
+                card.innerHTML = `
+                    <div class="w-full sm:w-2/5 relative h-48 sm:h-auto overflow-hidden">
+                        <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover premium-transition" onerror="this.src='https://placehold.co/400x300/2d080c/ffffff?text=Seoul+Table'">
+                        <span class="absolute top-3 left-3 px-2.5 py-1 bg-burgundy text-white text-[10px] font-semibold tracking-wider rounded uppercase">${item.tag}</span>
+                    </div>
+                    <div class="p-5 sm:w-3/5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-3">${badgesHtml}</div>
+                            <h4 class="font-serif text-lg text-burgundy dark:text-white mb-2 leading-snug">${item.name}</h4>
+                            <p class="text-xs text-stone-500 dark:text-gray-400 font-light line-clamp-2 leading-relaxed mb-4">${item.highlights}</p>
+                        </div>
+                        <div class="flex items-center justify-between border-t border-stone-200 dark:border-gray-800/60 pt-3">
+                            <span class="text-[11px] text-stone-500 dark:text-gray-500">평점 <strong>CatchTable ${item.catchtable}⭐</strong></span>
+                            <span class="text-[11px] text-stone-400 dark:text-gray-600">리뷰 ${item.reviews}</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Modal Handlers
+        function openPremiumAlert() {
+            document.getElementById('custom-modal').classList.remove('hidden');
+            addPoints(15);
+        }
+
+        function closePremiumAlert() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Initial filter run to show default recommended lists
+            filterRestaurants();
+
+            // Bind click to search button
+            const findBtn = document.getElementById('find-btn');
+            if (findBtn) {
+                findBtn.addEventListener('click', () => {
+                    filterRestaurants();
+                    const resultsContainer = document.getElementById('results-container');
+                    if (resultsContainer) {
+                        resultsContainer.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+
+            updateUserUI();
+            renderGuestbook();
+            
+            const WELCOME_DATE_KEY = "seoul_gourmet_welcome_date";
+            const today = new Date().toDateString();
+            if (localStorage.getItem(WELCOME_DATE_KEY) !== today) {
+                localStorage.setItem(WELCOME_DATE_KEY, today);
+                addPoints(10);
+                
+                const feedbackAlert = document.createElement('div');
+                feedbackAlert.className = "fixed bottom-5 right-5 bg-amber-600 text-white px-5 py-3 rounded-lg shadow-2xl flex items-center gap-3 z-50 text-xs font-semibold animate-pulse";
+                feedbackAlert.innerHTML = `<i class="fa-solid fa-calendar-check"></i> 일일 웰컴 보너스! +10 미식 포인트 적립 🎁`;
+                document.body.appendChild(feedbackAlert);
+                setTimeout(() => feedbackAlert.remove(), 4000);
+            }
+        });
+
         // Soft, Micro-Parallax Effect Logic
         let ticked = false;
         window.addEventListener('scroll', () => {
@@ -763,7 +1136,6 @@
                     const bg2 = document.getElementById('parallax-bg-2');
                     const heroText = document.getElementById('parallax-text');
                     
-                    // Hardware-accelerated 3D translations with extremely low ratios for a subtle float feel
                     if (bg1) {
                         bg1.style.transform = `translate3d(0, ${scrolled * 0.12}px, 0)`;
                     }
@@ -778,19 +1150,6 @@
                 ticked = true;
             }
         }, { passive: true });
-
-        // Init Event Listeners on load
-        window.addEventListener('DOMContentLoaded', () => {
-            // Initial filter run to show default recommended lists
-            filterRestaurants();
-
-            // Bind click to search button
-            document.getElementById('find-btn').addEventListener('click', () => {
-                filterRestaurants();
-                // Smooth scroll down to result feed
-                document.getElementById('results-container').scrollIntoView({ behavior: 'smooth' });
-            });
-        });
     </script>
 </body>
 </html>
